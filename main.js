@@ -13,10 +13,18 @@ const freelancers = [
   ]; 
 
   const addFreelancerInterval = setInterval(addFreelancer, 2000);
-  // render();
+  render();
+  updateAveragePrice();
+
+  function addFreelancer() {
+    const newFreelancer = generateRandomFreelancer();
+    freelancers.push(newFreelancer);
+    render();
+    updateAveragePrice();
+  }
 
 
-function renderFreelancers() {
+function render() {
     const freelancerListElement = document.getElementById("freelancer-list");
     freelancerListElement.innerHTML = "";
 
@@ -36,18 +44,10 @@ function generateRandomFreelancer() {
     const names = ["Carol", "David", "Eva", "Frank"];
     const occupations = ["Programmer", "Designer", "Marketing Specialist", "Consultant"];
 
-    const newFreelancer = {
+    return {
         name: names[Math.floor(Math.random() * names.length)],
         occupation: occupations[Math.floor(Math.random() * occupations.length)],
         startingPrice: Math.floor(Math.random() * 100) + 1,
+        
     };
-
-    freelancers.push(newFreelancer);
-    renderFreelancers();
-    updateAveragePrice();
 }
-
-renderFreelancers();
-updateAveragePrice();
-
-setInterval(generateRandomFreelancer, 5000); 
